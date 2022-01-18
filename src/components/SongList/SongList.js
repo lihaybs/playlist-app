@@ -3,11 +3,13 @@ import "./SongList.css";
 
 const SongList = ({ songList, deletSong, play }) => {
     return <div className="songs">
-        {songList.map(({ id, name, artist, http }) => (
-            <Song key={id} id={id} name={name} artist={artist} deletSong={deletSong} http={http} play={play} />
+        {songList.map(({ _id, id, title, duration, thumbnails_url, url }) => (
+            <Song key={_id} id={id} title={title} duration={duration} thumbnails_url={thumbnails_url} url={url} deletSong={deletSong} play={play} />
         ))}
     </div>
 };
 
 
 export default SongList
+
+

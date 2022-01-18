@@ -1,3 +1,3 @@
-export default function Header(params) {
+export default function Header() {
     return <h1> 🎼 playlist ⏯</h1>
 }

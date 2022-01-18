@@ -1,9 +1,9 @@
 import { useRef } from "react"
 
-export default function AddItemsForm({ AddSongToTheLIst }) {
+export default function AddItemsForm({ searchSong }) {
     const val = useRef();
     return (<div>
         <input ref={val} />
-        <button onClick={() => AddSongToTheLIst(val.current.value)}> ➕ </button>
+        <button onClick={() => searchSong(val.current.value)}> ➕ </button>
     </div>)
 }

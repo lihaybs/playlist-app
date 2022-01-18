@@ -1,0 +1,6 @@
+.SongChoise{
+    display: flex;
+    inline-size: auto;
+    text-align: center;
+    position: relative;
+}
