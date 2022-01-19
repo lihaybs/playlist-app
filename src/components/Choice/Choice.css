@@ -1,0 +1,7 @@
+.choice-card {
+    border: 1px solid;
+    background-color: rgb(116, 143, 134);
+    border-radius: 7px;
+    margin: 5px;
+    cursor: pointer;
+}

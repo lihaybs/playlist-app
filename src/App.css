@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+.song-player{
+  position: absolute;
+  top: 350px;
+  right: 800px;
+}

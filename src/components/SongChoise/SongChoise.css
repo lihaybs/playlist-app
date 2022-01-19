@@ -1,6 +1,8 @@
-.SongChoise{
+.SongChoise {
     display: flex;
     inline-size: auto;
     text-align: center;
     position: relative;
+    border-radius: 5px;
+    border: 1px solid;
 }

@@ -13,36 +13,56 @@ function App() {
   const [http, setHttp] = useState("https://www.youtube.com/watch?v=z-nMADrwC2c")
   const [songChoise, setSongChoise] = useState([])
   const [songList, setSongList] = useState([])
+  const [loginDetails, setLoginDetails] = useState({ username: "yosi", password: "12345" })
   const cardShow = useRef(0)
-  console.log(cardShow.current);
+  const loginShow = useRef(0)
 
   useEffect(() => {
-    getAllSong()
+    localStorage.accessToken = ""
   }, []);
 
-  const getAllSong = () => {
-    fetch(`http://localhost:3001/songs`)
+
+  const signUp = () => {
+    fetch(`http://localhost:3001/user/register`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(loginDetails),
+    })
       .then((res) => res.json())
       .then((data) => {
-        setSongList(data)
+        console.log(data.accessToken)
+        localStorage.accessToken = data.accessToken;
+        getAllSong()
+
+      })
+  }
+
+
+  const getAllSong = () => {
+    if (!localStorage.accessToken) return localStorage.accessToken = "";
+    loginShow.current++;
+    fetch(`http://localhost:3001/songs`, {
+      method: 'GET',
+      headers: {
+        "content-type": "application/json",
+        "authorization": `bearer ${localStorage.accessToken}`
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
         console.log(data)
+        setSongList(data)
       })
   }
 
   const searchSong = (text) => {
-    fetch(`https://youtube-search-results.p.rapidapi.com/youtube-search/?q=${text}`, {
-      "method": "GET",
-      "headers": {
-        "x-rapidapi-host": "youtube-search-results.p.rapidapi.com",
-        "x-rapidapi-key": "0e4f334be8mshcf8e732f1d50efep175f18jsn28fd03bda402"
-      }
-    })
+    fetch(`http://localhost:3001/api/search/${text}`)
       .then(res => res.json())
       .then(data => {
-        let songs = data.items.filter(song => song.type === "video");
-        console.log(songs)
+        // let songs = data.items.filter(song => song.type === "video");
+        console.log(data)
         cardShow.current++
-        setSongChoise(songs)
+        setSongChoise(data)
       })
       .catch(err => {
         console.error(err);
@@ -50,6 +70,7 @@ function App() {
   }
 
   const AddSongToTheLIst = (id) => {
+    if (!localStorage.accessToken) return localStorage.accessToken = "";
     const song = songChoise.find(song => song.id === id)
     const newSong = {
       title: song.title,
@@ -63,22 +84,55 @@ function App() {
     };
     fetch(`http://localhost:3001/songs`, {
       method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(newSong),
-    });
-    cardShow.current--
-    getAllSong();
+      headers: {
+        "content-type": "application/json",
+        "authorization": `bearer ${localStorage.accessToken}`
+      },
+      body: JSON.stringify(newSong)
+    }).then(() => {
+      cardShow.current--
+      getAllSong()
+    })
   }
 
   const deletSong = (id) => {
     fetch(`http://localhost:3001/songs/${id}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
         "content-type": "application/json",
-      }
-    });
-    getAllSong();
+        "authorization": `bearer ${localStorage.accessToken}`
+      },
+
+    })
+      .then((res) => res.json())
+      .then(data => {
+        console.log(data);
+        getAllSong()
+      })
   }
+
+  const userName = (input) => {
+    setLoginDetails({ password: loginDetails.password, username: input });
+  };
+  const password = (input) => {
+    setLoginDetails({ username: loginDetails.username, password: input });
+  };
+
+
+  const login = () => {
+    fetch(`http://localhost:3001/user/login`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(loginDetails),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.accessToken)
+        localStorage.accessToken = data.accessToken;
+        getAllSong()
+      })
+  }
+
 
 
   const play = (http) => {
@@ -87,11 +141,11 @@ function App() {
 
   return (
     <div className="App" >
-      <Header />
+      <Header login={login} userName={userName} password={password} signUp={signUp} loginShow={loginShow} />
       <AddItemsForm searchSong={searchSong} />
-      <SongChoise songChoise={songChoise} AddSongToTheLIst={AddSongToTheLIst} cardShow={cardShow}></SongChoise>}
+      <SongChoise songChoise={songChoise} AddSongToTheLIst={AddSongToTheLIst} cardShow={cardShow}></SongChoise>
       <SongList songList={songList} deletSong={deletSong} play={play} />
-      <ReactPlayer url={http} />
+      <ReactPlayer className="song-player" url={http} />
     </div>
   );
 }
