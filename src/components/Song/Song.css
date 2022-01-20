@@ -7,14 +7,18 @@ img{
  }
  .Song-card{
      display: flex;
-     flex-direction: column;
+     flex-direction: row;
      text-align: center;
      position: relative;
-     left: 155px;
-     border: 1px solid;
-     background-color:rgb(95, 141, 126);
+     border: 2px solid;
+     background-color:rgba(95, 141, 126, 0.7);
      border-radius:7px;
      margin: 5px;
-     cursor: pointer;
-     
+    
+    
  }
+ .Song{
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+}

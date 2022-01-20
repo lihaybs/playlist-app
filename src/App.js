@@ -141,7 +141,7 @@ function App() {
 
   return (
     <div className="App" >
-      <Header login={login} userName={userName} password={password} signUp={signUp} loginShow={loginShow} />
+      <Header login={login} userName={userName} password={password} signUp={signUp} loginShow={loginShow} loginDetails={loginDetails} />
       <AddItemsForm searchSong={searchSong} />
       <SongChoise songChoise={songChoise} AddSongToTheLIst={AddSongToTheLIst} cardShow={cardShow}></SongChoise>
       <SongList songList={songList} deletSong={deletSong} play={play} />

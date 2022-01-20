@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  height: 100ch;
+width: 100%;
+  background-color: #cccccc;
+  
+  background-image: url("https://cdna.artstation.com/p/assets/images/images/019/566/710/large/kate-kneebone-su-background-style.jpg?1564059648") ;
 }
 
 .App-logo {
@@ -42,3 +47,4 @@
   top: 350px;
   right: 800px;
 }
+
