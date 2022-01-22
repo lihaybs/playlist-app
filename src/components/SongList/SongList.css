@@ -1,7 +1,13 @@
 .songs {
+    margin-right: 10px;
     max-width: 30%;
-    max-height:30%;
+    max-height:60%;
     position: absolute;
-    top: 40%;
+    top: 30%;
     right: 0%;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding-right: 10px;
+    background-color:rgba(23, 155, 207, 0.3);
+    border-radius: 8px;
 }

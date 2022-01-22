@@ -2,5 +2,10 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-
+    text-decoration-color: red;
 }
+.welcome{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    text-decoration-color: red;}

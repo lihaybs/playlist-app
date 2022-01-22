@@ -5,4 +5,10 @@
     position: relative;
     border-radius: 5px;
     border: 1px solid;
+    max-width: 60%;
+    overflow: hidden;
+    overflow-x: scroll;
+    top: 20%;
+    left: 5%;
+    position: absolute;
 }

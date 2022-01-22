@@ -1,24 +1,33 @@
 img{
-    max-width: 120px;
-   max-height: 400px;
-     padding: 15px;
-     margin:10px;
+    max-width: 200px;
+   max-height: 100px;
+     padding: 0;
+     margin:0;
  
  }
  .Song-card{
+     width:400px;
      display: flex;
-     flex-direction: row;
-     text-align: center;
+     flex-direction: column;
+     text-align: flex;
      position: relative;
      border: 2px solid;
      background-color:rgba(95, 141, 126, 0.7);
      border-radius:7px;
      margin: 5px;
-    
+     justify-content: space-around;
+     align-content: space-around;
     
  }
  .Song{
-    display: flex;
-    justify-content: space-between;
-    align-content: space-between;
+    
+}
+
+.title{
+    margin-right: 0;
+    padding: 10px;
+    height: 30px;
+    width: 100px;
+    overflow: hidden;
+    
 }

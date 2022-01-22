@@ -5,20 +5,23 @@ import SongChoise from "./components/SongChoise/SongChoise"
 import Header from './components/Header/Header';
 import AddItemsForm from './components/AddItemForm/AddItemForm';
 import { useRef, useState, useEffect } from 'react';
-import ReactPlayer from 'react-player';
+// import ReactPlayer from 'react-player';
+// import Plyr from 'react-plyr';
+import Plyr from "plyr-react";
+import 'plyr-react/dist/plyr.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SoundCloudPlayer from 'react-player/soundcloud';
+// import SoundCloudPlayer from 'react-player/soundcloud';
 
 function App() {
-  const [http, setHttp] = useState("https://www.youtube.com/watch?v=z-nMADrwC2c")
+  const [http, setHttp] = useState("z-nMADrwC2c")
   const [songChoise, setSongChoise] = useState([])
   const [songList, setSongList] = useState([])
   const [loginDetails, setLoginDetails] = useState({ username: "yosi", password: "12345" })
-  const cardShow = useRef(0)
-  const loginShow = useRef(0)
+  const [cardShow, setCardShow] = useState(false);
+  const [loginShow, setLoginShow] = useState(true);
 
   useEffect(() => {
-    localStorage.accessToken = ""
+    localStorage.accessToken = false
   }, []);
 
 
@@ -39,8 +42,8 @@ function App() {
 
 
   const getAllSong = () => {
-    if (!localStorage.accessToken) return localStorage.accessToken = "";
-    loginShow.current++;
+    if (localStorage.accessToken === "undefined") return localStorage.accessToken = "";
+    setLoginShow(false);
     fetch(`http://localhost:3001/songs`, {
       method: 'GET',
       headers: {
@@ -61,7 +64,7 @@ function App() {
       .then(data => {
         // let songs = data.items.filter(song => song.type === "video");
         console.log(data)
-        cardShow.current++
+        setCardShow(true)
         setSongChoise(data)
       })
       .catch(err => {
@@ -90,9 +93,10 @@ function App() {
       },
       body: JSON.stringify(newSong)
     }).then(() => {
-      cardShow.current--
+      setCardShow(false)
       getAllSong()
     })
+
   }
 
   const deletSong = (id) => {
@@ -127,25 +131,42 @@ function App() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.accessToken)
         localStorage.accessToken = data.accessToken;
+        console.log(localStorage.accessToken)
         getAllSong()
       })
+      .catch(err => {
+        console.error(err);
+      });
   }
 
 
 
-  const play = (http) => {
-    setHttp(http)
-  }
+  // const play = (http) => {
+  //   setHttp(http)
+  // }
+  const play = (id) => {
+    setHttp({
+      type: "video",
+      sources: [
+        {
+          src: id,
+          provider: "youtube",
+        },
+      ],
+    });
+  };
 
   return (
     <div className="App" >
       <Header login={login} userName={userName} password={password} signUp={signUp} loginShow={loginShow} loginDetails={loginDetails} />
-      <AddItemsForm searchSong={searchSong} />
+      <AddItemsForm songList={songList} searchSong={searchSong} />
       <SongChoise songChoise={songChoise} AddSongToTheLIst={AddSongToTheLIst} cardShow={cardShow}></SongChoise>
       <SongList songList={songList} deletSong={deletSong} play={play} />
-      <ReactPlayer className="song-player" url={http} />
+      {/* <plyr className="song-player" videoId={http} /> */}
+      <div className="song-player">
+        <Plyr source={http} />
+      </div>
     </div>
   );
 }

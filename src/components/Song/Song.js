@@ -10,7 +10,7 @@ const Song = ({ id, title, duration, thumbnails_url, deletSong, url, play }) => 
                     <Button className="btn btn-success btn-lo try" onClick={() => play(url)}> ⏯ </Button>
                     <Button onClick={() => deletSong(id)}>❌</Button>
                     <img src={thumbnails_url} alt="" />
-                    <label title={title}>
+                    <label className="title" title={title}>
                         {title} {duration}
                     </label>
                 </div>
