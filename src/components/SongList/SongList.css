@@ -1,7 +1,7 @@
 .songs {
-    margin-right: 10px;
+    /* margin-right: 10px; */
     max-width: 30%;
-    max-height:60%;
+    max-height:70%;
     position: absolute;
     top: 30%;
     right: 0%;
@@ -10,4 +10,10 @@
     padding-right: 10px;
     background-color:rgba(23, 155, 207, 0.3);
     border-radius: 8px;
+    
+}
+
+.songs::-webkit-scrollbar{
+  display: none;
+
 }

@@ -6,6 +6,7 @@ width: 100vw;
   background-image: url("https://cdn.wallpapersafari.com/11/48/T8LzUD.jpg") ;
 }
 
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -46,7 +47,7 @@ width: 100vw;
   top: 60%;
   right: 50%;
   height: 25%;
-  width: 30%;
+  width: 50%;
 }
  
 

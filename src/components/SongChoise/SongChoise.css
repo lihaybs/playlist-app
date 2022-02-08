@@ -12,3 +12,9 @@
     left: 5%;
     position: absolute;
 }
+
+
+.close-btn{
+    position: absolute;
+    float: inline-start;
+}

@@ -100,19 +100,23 @@ function App() {
   }
 
   const deletSong = (id) => {
-    fetch(`http://localhost:3001/songs/${id}`, {
-      method: 'DELETE',
-      headers: {
-        "content-type": "application/json",
-        "authorization": `bearer ${localStorage.accessToken}`
-      },
+    try {
+      fetch(`http://localhost:3001/songs/${id}`, {
+        method: 'DELETE',
+        headers: {
+          "content-type": "application/json",
+          "authorization": `bearer ${localStorage.accessToken}`
+        },
 
-    })
-      .then((res) => res.json())
-      .then(data => {
-        console.log(data);
-        getAllSong()
       })
+        .then((res) => res.json())
+        .then(data => {
+          console.log(data);
+          getAllSong()
+        })
+    } catch (error) {
+      alert(error.message)
+    }
   }
 
   const userName = (input) => {

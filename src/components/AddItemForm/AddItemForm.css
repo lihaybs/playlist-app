@@ -1,8 +1,14 @@
 .combo-box-demo{
     display: flex !important;
-    position: absolute !important;
+    /* position: absolute !important; */
     max-width: 40% !important;
 text-align: center !important;
    justify-content:center !important;
 
+}
+
+.inputs-box{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
 }
