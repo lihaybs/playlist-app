@@ -11,7 +11,7 @@ export default function Header({ login, password, userName, signUp, loginShow, l
         }, 1500);
     }
     return !loginShow ? <div className="header">
-        <div className="welcome"> <h6> welcome <h5>{loginDetails.username} !</h5> </h6></div>
+        <div className="welcome"> <h6> welcome <h5>!</h5> </h6></div>
         <h1> 🎼 playlist ⏯</h1></div> :
         <div className="header">
             <div className="login">
